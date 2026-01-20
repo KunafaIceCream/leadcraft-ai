@@ -1,27 +1,29 @@
-import { Lead, Template, User } from './types';
+import { Lead, Template, User, SignalTrigger } from './types';
 
 const STORAGE_KEYS = {
-  leads: 'tahqeeq_leads',
-  templates: 'tahqeeq_templates',
-  user: 'tahqeeq_user',
-  isAuthenticated: 'tahqeeq_auth',
+  leads: 'coldhit_leads',
+  templates: 'coldhit_templates',
+  user: 'coldhit_user',
+  isAuthenticated: 'coldhit_auth',
+  discoveredTriggers: 'coldhit_triggers',
+  apiKeys: 'coldhit_apikeys',
 };
 
-// Default templates
+// Default templates with signal support
 const defaultTemplates: Template[] = [
   {
     id: '1',
-    name: 'Initial Outreach - Professional',
+    name: 'Initial Outreach - Signal-Based',
     phase: 'Initial',
     body: `Dear {{contactName}},
 
-I hope this message finds you well. I came across {{company}} and was impressed by your work in the {{sector}} sector.
+I came across {{company}} and noticed {{signalTrigger}}.
 
 {{contextHook}}
 
 {{painQuestion}}
 
-I would love to explore how we might be able to support your goals.
+Would love to explore how we might support your goals in the {{sector}} space.
 
 Best regards`,
   },
@@ -32,6 +34,8 @@ Best regards`,
     body: `Hi {{contactName}},
 
 I wanted to follow up on my previous message regarding {{company}}.
+
+Given {{signalTrigger}}, I believe timing is particularly relevant now.
 
 {{painQuestion}}
 
@@ -66,6 +70,22 @@ This is my final outreach regarding a partnership opportunity with {{company}}.
 I'm confident we can help address this challenge. Let's connect before the quarter ends.
 
 Best regards`,
+  },
+  {
+    id: '5',
+    name: 'Trigger Follow-Up - Value Add',
+    phase: 'Trigger Follow-Up',
+    body: `Hi {{contactName}},
+
+I noticed {{signalTrigger}} and thought this would be valuable context.
+
+Based on what I've seen with other {{sector}} companies facing similar situations, here's what typically works:
+
+{{contextHook}}
+
+Would it be helpful to share more specific strategies that have worked?
+
+Best`,
   },
 ];
 
@@ -132,6 +152,34 @@ export const storage = {
   deleteTemplate: (id: string): void => {
     const templates = storage.getTemplates().filter((t) => t.id !== id);
     storage.saveTemplates(templates);
+  },
+
+  // Discovered Triggers
+  getDiscoveredTriggers: (): SignalTrigger[] => {
+    const data = localStorage.getItem(STORAGE_KEYS.discoveredTriggers);
+    return data ? JSON.parse(data) : [];
+  },
+
+  saveDiscoveredTriggers: (triggers: SignalTrigger[]): void => {
+    localStorage.setItem(STORAGE_KEYS.discoveredTriggers, JSON.stringify(triggers));
+  },
+
+  addDiscoveredTrigger: (trigger: SignalTrigger): void => {
+    const triggers = storage.getDiscoveredTriggers();
+    triggers.push(trigger);
+    storage.saveDiscoveredTriggers(triggers);
+  },
+
+  // API Keys (simulated secure storage)
+  getApiKeys: (): Record<string, string> => {
+    const data = localStorage.getItem(STORAGE_KEYS.apiKeys);
+    return data ? JSON.parse(data) : {};
+  },
+
+  saveApiKey: (key: string, value: string): void => {
+    const keys = storage.getApiKeys();
+    keys[key] = value;
+    localStorage.setItem(STORAGE_KEYS.apiKeys, JSON.stringify(keys));
   },
 
   // Auth (simulated)
