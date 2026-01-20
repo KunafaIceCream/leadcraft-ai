@@ -9,7 +9,8 @@ import {
   BarChart3,
   Settings,
   LogOut,
-  Mail,
+  Crosshair,
+  Radar,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/contexts/AuthContext';
@@ -19,6 +20,7 @@ const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { path: '/leads', label: 'Leads', icon: Users },
   { path: '/leads/upload', label: 'Upload Leads', icon: Upload },
+  { path: '/leads/discover', label: 'Discover Triggers', icon: Radar },
   { path: '/generate', label: 'Generate Drafts', icon: Sparkles },
   { path: '/export', label: 'Export', icon: Download },
   { path: '/templates', label: 'Templates', icon: FileText },
@@ -36,11 +38,11 @@ export const Sidebar = () => {
         {/* Logo */}
         <div className="flex h-16 items-center gap-2 border-b border-sidebar-border px-6">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <Mail className="h-5 w-5 text-primary-foreground" />
+            <Crosshair className="h-5 w-5 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-lg font-bold text-sidebar-foreground">Tahqeeq</h1>
-            <p className="text-xs text-sidebar-foreground/60">Email Automator</p>
+            <h1 className="text-lg font-bold text-sidebar-foreground">ColdHit</h1>
+            <p className="text-xs text-sidebar-foreground/60">Signal-Driven Outreach</p>
           </div>
         </div>
 
