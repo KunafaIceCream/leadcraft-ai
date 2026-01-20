@@ -46,6 +46,7 @@ const phaseColors: Record<Phase, string> = {
   Reminder: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400',
   Escalation: 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400',
   Pitch: 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-400',
+  'Trigger Follow-Up': 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400',
 };
 
 export const Leads = () => {
@@ -136,6 +137,7 @@ export const Leads = () => {
                 <SelectItem value="Reminder">Reminder</SelectItem>
                 <SelectItem value="Escalation">Escalation</SelectItem>
                 <SelectItem value="Pitch">Pitch</SelectItem>
+                <SelectItem value="Trigger Follow-Up">Trigger Follow-Up</SelectItem>
               </SelectContent>
             </Select>
           </div>
