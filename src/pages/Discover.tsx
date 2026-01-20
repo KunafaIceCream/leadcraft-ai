@@ -62,6 +62,7 @@ const simulateDiscovery = async (settings: {
   const mockTriggers: SignalTrigger[] = [
     {
       id: crypto.randomUUID(),
+      platform: 'X',
       source: 'X',
       content: 'We\'re struggling to find qualified talent in Qatar\'s competitive tech market. Any recommendations?',
       authorName: 'Ahmed Al-Thani',
@@ -75,6 +76,7 @@ const simulateDiscovery = async (settings: {
     },
     {
       id: crypto.randomUUID(),
+      platform: 'LinkedIn',
       source: 'LinkedIn',
       content: 'Excited to announce our Series B funding round! Looking forward to expanding our Doha operations.',
       authorName: 'Fatima Hassan',
@@ -88,6 +90,7 @@ const simulateDiscovery = async (settings: {
     },
     {
       id: crypto.randomUUID(),
+      platform: 'X',
       source: 'X',
       content: 'Just appointed as the new Head of Digital Transformation at Doha Bank. Excited for the challenges ahead!',
       authorName: 'Mohammed Al-Kuwari',
@@ -101,6 +104,7 @@ const simulateDiscovery = async (settings: {
     },
     {
       id: crypto.randomUUID(),
+      platform: 'LinkedIn',
       source: 'LinkedIn',
       content: 'Our customer retention rates have been declining despite increased marketing spend. Time to rethink our approach.',
       authorName: 'Sara Al-Marri',
@@ -194,8 +198,7 @@ export const Discover = () => {
       signalTrigger: trigger.content,
       signalDate: trigger.discoveredAt,
       signalStrength: trigger.signalStrength,
-      signalSource: trigger.source,
-      phase: 'Trigger Follow-Up',
+      phase: 'Trigger Follow-Up' as const,
       aiScore: 0,
       lastUpdated: new Date().toISOString(),
       notes: `Discovered via ${trigger.source}: ${trigger.url}`,
